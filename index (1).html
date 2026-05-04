@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kim Confeitaria | Cursos de Confeitaria Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#e8637a;--rose-dk:#c94a62;--rose-lt:#f5a0b0;--rose-pale:#fdeef1;
+  --peach:#f4a261;--peach-lt:#fcd5b5;--peach-pale:#fff5ee;
+  --mint:#52b788;--mint-lt:#b7e4c7;--mint-pale:#f0faf5;
+  --lav:#9b72cf;--lav-lt:#ddd0f5;--lav-pale:#f5f0ff;
+  --cream:#fff9f5;--warm:#fffcf8;
+  --brown:#2a1208;--brown-mid:#6b3a28;
+  --text:#2d1810;--text-mid:#6b4a3e;--text-soft:#9a7068;
+  --border:rgba(61,31,15,0.1);
+  --sh-sm:0 2px 12px rgba(61,31,15,0.07);
+  --sh-md:0 8px 32px rgba(61,31,15,0.11);
+  --sh-lg:0 20px 60px rgba(61,31,15,0.14);
+  --r:14px;--r-lg:24px;--r-xl:36px;
+  --g:clamp(20px,5vw,60px);--max:1080px
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;word-break:break-word}
+img,video{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--g)}
+.sec{padding:clamp(60px,9vw,112px) 0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--rose-pale);color:var(--rose);border:1px solid var(--rose-lt);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.tag.mint{background:var(--mint-pale);color:var(--mint);border-color:var(--mint-lt)}
+.tag.peach{background:var(--peach-pale);color:var(--peach);border-color:var(--peach-lt)}
+.tag.lav{background:var(--lav-pale);color:var(--lav);border-color:var(--lav-lt)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:100px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;transition:all .22s;text-decoration:none;text-align:center}
+.btn-rose{background:var(--rose);color:#fff;padding:15px 32px;font-size:14px;box-shadow:0 8px 24px rgba(232,99,122,.4)}
+.btn-rose:hover{background:var(--rose-dk);transform:translateY(-2px)}
+.btn-rose-lg{background:var(--rose);color:#fff;padding:18px 40px;font-size:16px;box-shadow:0 10px 30px rgba(232,99,122,.45)}
+.btn-rose-lg:hover{background:var(--rose-dk);transform:translateY(-2px)}
+.btn-rose-full{display:block;width:100%;background:var(--rose);color:#fff;padding:15px 24px;font-size:14px;font-weight:700;border:none;border-radius:100px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .22s;text-align:center;box-shadow:0 6px 20px rgba(232,99,122,.35)}
+.btn-rose-full:hover{background:var(--rose-dk);transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.38);backdrop-filter:blur(8px);padding:15px 28px;font-size:14px;font-weight:400}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.rv.on{opacity:1;transform:none}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.fl{animation:float 4s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mqr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* ANNOUNCE */
+#announce{background:linear-gradient(90deg,var(--rose-dk),var(--rose) 50%,#c94a80);color:#fff;text-align:center;padding:11px var(--g);font-size:13px;font-weight:500;line-height:1.5;z-index:200;position:relative;width:100%}
+
+/* TOPBAR */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(255,249,245,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:11px var(--g);display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(-100%);transition:transform .38s cubic-bezier(.22,1,.36,1)}
+#topbar.show{transform:translateY(0)}
+.tb-text{font-size:13px;font-weight:500;color:var(--text-mid);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-text strong{color:var(--rose)}
+
+/* HERO */
+#hero{position:relative;height:100vh;background:var(--brown);overflow:hidden}
+#hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(20,6,2,.75) 0%,rgba(20,6,2,.35) 60%,transparent 100%),linear-gradient(to top,rgba(20,6,2,.6) 0%,transparent 50%)}
+.hero-body{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;justify-content:center;padding:90px var(--g) 130px;max-width:min(700px,100%)}
+@keyframes fadeUpHero{from{opacity:0;transform:translateY(18px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+.hero-pre{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:14px;animation:fadeUpHero .7s cubic-bezier(.22,1,.36,1) .05s both}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.28);border-radius:100px;padding:6px 16px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;width:fit-content;margin-bottom:16px;animation:fadeUpHero .7s cubic-bezier(.22,1,.36,1) .1s both}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--rose-lt);flex-shrink:0;animation:pulse 2.2s ease infinite}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,58px);font-weight:900;line-height:1.08;color:#fff;max-width:16ch;animation:fadeUpHero .85s cubic-bezier(.22,1,.36,1) .22s both}
+.hero-h1 em{color:var(--rose-lt);font-style:italic}
+.hero-sub{margin-top:16px;font-size:clamp(12px,1.3vw,15px);font-weight:300;color:rgba(255,255,255,.75);max-width:520px;line-height:1.75;animation:fadeUpHero .85s cubic-bezier(.22,1,.36,1) .38s both}
+.hero-btns{margin-top:28px;display:flex;align-items:center;gap:11px;flex-wrap:wrap;animation:fadeUpHero .75s cubic-bezier(.22,1,.36,1) .52s both}
+.hero-anchor{margin-top:16px;font-size:11px;color:rgba(255,255,255,.5);animation:fadeUpHero .7s cubic-bezier(.22,1,.36,1) .65s both;letter-spacing:.02em;line-height:1.8;padding-bottom:4px}
+.hero-anchor strong{color:rgba(255,255,255,.75)}
+
+
+
+
+
+
+
+
+/* PROBLEMA */
+#problema{background:var(--warm);position:relative;overflow:hidden}
+.prob-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.prob-b1{width:400px;height:400px;background:var(--rose-pale);top:-60px;right:-60px}
+.prob-b2{width:300px;height:300px;background:var(--peach-pale);bottom:-40px;left:-40px}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative;z-index:1}
+.prob-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,44px);font-weight:900;line-height:1.1;color:var(--text);max-width:16ch}
+.prob-title span{color:var(--rose)}
+.prob-body{font-size:15px;color:var(--text-mid);line-height:1.82;margin-top:18px}
+.prob-body strong{color:var(--text)}
+.prob-highlight{margin-top:28px;background:#fff;border-left:3px solid var(--rose);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;font-size:15px;font-weight:600;color:var(--text);line-height:1.5}
+.prob-visual{background:linear-gradient(135deg,var(--rose-pale),var(--peach-lt));border-radius:var(--r-xl);padding:44px 36px;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.prob-vis-bg{position:absolute;font-size:130px;opacity:.08}
+.prob-vis-item{background:#fff;border-radius:var(--r);padding:14px 20px;width:100%;box-shadow:var(--sh-sm);border:1px solid var(--border);position:relative;z-index:1}
+.pvi-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-soft)}
+.pvi-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;line-height:1;margin-top:4px}
+.pvi-val.red{color:#e03}
+.pvi-val.green{color:var(--mint)}
+.pvi-arrow{text-align:center;font-size:22px;color:var(--rose);position:relative;z-index:1}
+
+/* MECANISMO */
+#mecanismo{background:var(--cream)}
+.mec-box{background:linear-gradient(140deg,var(--rose) 0%,var(--rose-dk) 60%,#a33558 100%);border-radius:var(--r-xl);padding:clamp(36px,6vw,68px);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(232,99,122,.32)}
+.mec-box::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.mec-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.mec-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,44px);font-weight:900;color:#fff;max-width:22ch;line-height:1.1;position:relative;z-index:1}
+.mec-title em{font-style:italic;color:var(--rose-lt)}
+.mec-body{margin-top:18px;font-size:15px;color:rgba(255,255,255,.85);max-width:600px;line-height:1.82;position:relative;z-index:1}
+.mec-body strong{color:#fff}
+.mec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;position:relative;z-index:1;min-width:0}
+.mec-card{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:var(--r);padding:20px}
+.mec-card-ico{font-size:24px;margin-bottom:10px}
+.mec-card-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+.mec-card-body{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6}
+
+/* CURSOS */
+#cursos{background:var(--warm)}
+.cursos-intro{max-width:600px;margin-bottom:44px}
+.cursos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cc{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+.cc:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--rose-lt)}
+.cc.featured{border-color:var(--rose-lt);background:linear-gradient(to bottom,#fff5f7,#fff)}
+.cc-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;flex-shrink:0}
+.cc-badge{position:absolute;top:10px;left:10px;background:var(--rose);color:#fff;border-radius:100px;padding:3px 10px;font-size:10px;font-weight:700}
+.cc-badge.green{background:var(--mint)}
+.cc-body{padding:20px 20px 8px;flex:1}
+.cc-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);line-height:1.25}
+.cc-for{font-size:11px;color:var(--rose);font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+.cc-desc{margin-top:8px;font-size:12px;color:var(--text-soft);line-height:1.65}
+.cc-foot{padding:14px 20px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--border);margin-top:auto;flex-wrap:wrap}
+.cc-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--rose)}
+.cc-cta{background:var(--rose);color:#fff;border:none;border-radius:100px;padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;text-decoration:none;display:inline-block}
+.cc-cta:hover{background:var(--rose-dk)}
+
+/* apostilas row */
+.apost-section{margin-top:32px;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:var(--sh-sm)}
+.apost-left{flex:1;min-width:220px}
+.apost-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+.apost-desc{font-size:13px;color:var(--text-soft);margin-top:5px;line-height:1.6}
+.apost-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.ap-pill{background:var(--peach-pale);border:1px solid var(--peach-lt);border-radius:100px;padding:5px 12px;font-size:11px;font-weight:500;color:var(--brown-mid)}
+
+/* KIM */
+#kim{background:var(--cream)}
+.kim-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.kim-img{aspect-ratio:3/4;border-radius:var(--r-xl);background:linear-gradient(135deg,var(--rose-pale),var(--peach-lt));display:flex;align-items:center;justify-content:center;font-size:68px;overflow:hidden;box-shadow:var(--sh-lg);position:relative}
+.kim-img img{width:100%;height:100%;object-fit:cover}
+.kim-fl-1{position:absolute;top:-14px;right:-14px;background:var(--rose);border-radius:var(--r);padding:14px 18px;color:#fff;text-align:center;box-shadow:var(--sh-md)}
+.kim-fl-1 .kfn{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;line-height:1}
+.kim-fl-1 .kfl{font-size:9px;font-weight:700;opacity:.85;letter-spacing:.05em}
+.kim-fl-2{position:absolute;bottom:22px;left:-18px;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:13px 16px;box-shadow:var(--sh-md)}
+.kim-stars{color:#f4c430;font-size:12px;letter-spacing:1px}
+.kim-fl-nm{font-size:12px;font-weight:700;color:var(--text);margin-top:3px}
+.kim-fl-sb{font-size:10px;color:var(--text-soft);margin-top:1px}
+.kim-name{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:900;color:var(--text);line-height:1.05}
+.kim-name em{color:var(--rose);font-style:italic}
+.kim-bio{margin-top:18px;font-size:14px;color:var(--text-mid);line-height:1.85}
+.kim-bio strong{color:var(--text)}
+.kim-tags{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap}
+.ktag{background:var(--warm);border:1px solid var(--border);border-radius:100px;padding:6px 13px;font-size:11px;font-weight:500;color:var(--text-mid)}
+
+/* PARA QUEM */
+#para-quem{background:var(--warm)}
+.pq-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.pq-items{margin-top:28px;display:flex;flex-direction:column;gap:13px}
+.pq-item{display:flex;align-items:flex-start;gap:13px;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh-sm);transition:all .22s}
+.pq-item:hover{border-color:var(--rose-lt);transform:translateX(4px)}
+.pq-check{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--rose-pale);color:var(--rose);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
+.pq-txt{font-size:13px;color:var(--text-mid);line-height:1.6}
+.pq-vis{background:linear-gradient(150deg,var(--rose-pale),var(--peach-lt));border-radius:var(--r-xl);padding:48px 36px;min-height:360px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.pq-vis-bg{position:absolute;font-size:130px;opacity:.1}
+.pq-big{font-family:'Playfair Display',serif;font-size:80px;font-weight:900;color:var(--rose);line-height:1;text-align:center;position:relative;z-index:1}
+.pq-big-sub{font-size:13px;color:var(--rose);font-weight:600;margin-top:6px;text-align:center;position:relative;z-index:1}
+
+/* DEPOIMENTOS */
+#depoimentos{background:var(--cream);overflow:hidden}
+.dep-wrap{margin-top:44px;position:relative;-webkit-mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent);mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent)}
+.dep-row{display:flex;gap:13px;width:max-content;animation:mq 34s linear infinite}
+.dep-row.rev{display:flex;gap:13px;width:max-content;animation:mqr 40s linear infinite;margin-top:13px}
+.dep-wrap:hover .dep-row,.dep-wrap:hover .dep-row.rev{animation-play-state:paused}
+.dep-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 22px;width:320px;flex-shrink:0;display:flex;flex-direction:column;gap:13px;box-shadow:var(--sh-sm)}
+.dep-stars{color:#f4c430;font-size:12px;letter-spacing:2px}
+.dep-text{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--text-mid);line-height:1.65;flex:1}
+.dep-auth{display:flex;align-items:center;gap:9px;margin-top:auto}
+.dep-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--rose-lt),var(--peach));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--brown)}
+.dep-nm{font-size:12px;font-weight:700;color:var(--text)}
+.dep-rl{font-size:10px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.05em}
+
+/* GARANTIA + CTA FINAL */
+#cta-final{background:var(--brown);position:relative;overflow:hidden;padding:clamp(80px,12vw,140px) var(--g)}
+.cfb1,.cfb2{position:absolute;border-radius:50%;pointer-events:none}
+.cfb1{width:480px;height:480px;background:rgba(232,99,122,.22);filter:blur(100px);top:-80px;left:-80px}
+.cfb2{width:360px;height:360px;background:rgba(244,162,97,.18);filter:blur(100px);bottom:-60px;right:-50px}
+.cta-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.gar-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:8px 18px;font-size:12px;color:rgba(255,255,255,.85);font-weight:500;margin-bottom:28px}
+.cf-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,58px);font-weight:900;color:#fff;line-height:1.05}
+.cf-title em{color:var(--rose-lt);font-style:italic}
+.gar-text{margin-top:16px;font-size:15px;color:rgba(255,255,255,.7);line-height:1.78;max-width:560px;margin-left:auto;margin-right:auto}
+.gar-text strong{color:#fff}
+.cf-divider{width:60px;height:2px;background:var(--rose);margin:28px auto;border-radius:2px;opacity:.6}
+.cf-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.75;max-width:520px;margin:0 auto}
+.cf-sub strong{color:rgba(255,255,255,.9)}
+.cf-btns{margin-top:36px;display:flex;justify-content:center;gap:11px;flex-wrap:wrap}
+.cf-seals{margin-top:16px;font-size:11px;color:rgba(255,255,255,.38);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* FAQ */
+#faq{background:var(--warm)}
+.faq-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start}
+.faq-left{position:sticky;top:90px}
+.faq-left-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,44px);font-weight:900;color:var(--text);line-height:1.1;margin-top:6px}
+.faq-left-title span{color:var(--rose)}
+.faq-sub{margin-top:14px;font-size:13px;color:var(--text-soft);line-height:1.75}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 0;background:none;border:none;text-align:left;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text);transition:color .2s}
+.faq-q:hover{color:var(--rose)}
+.faq-ico{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--rose-pale);color:var(--rose);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:300;line-height:1;transition:transform .3s,background .2s}
+.faq-item.open .faq-ico{transform:rotate(45deg);background:var(--rose);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1)}
+.faq-a-in{padding:0 0 18px;font-size:13px;color:var(--text-mid);line-height:1.75}
+.faq-item.open .faq-a{max-height:200px}
+
+/* FOOTER */
+footer{background:var(--brown);border-top:1px solid rgba(255,255,255,.08);padding:26px var(--g);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-brand{font-family:'Playfair Display',serif;font-size:15px;color:rgba(255,255,255,.45)}
+.foot-links{display:flex;gap:18px}
+.foot-links a{font-size:11px;color:rgba(255,255,255,.3);transition:color .2s}
+.foot-links a:hover{color:rgba(255,255,255,.65)}
+.foot-copy{font-size:10px;color:rgba(255,255,255,.22)}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .prob-grid,.kim-grid,.pq-grid,.faq-grid{grid-template-columns:1fr;gap:36px}
+  .prob-visual,.pq-vis{display:none}
+  .faq-left{position:static}
+  .cursos-grid{grid-template-columns:1fr 1fr}
+  .mec-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .cursos-grid{grid-template-columns:1fr}
+  .mec-grid{grid-template-columns:1fr}
+  #topbar .tb-text{display:none}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div id="announce">
+  "Não é sobre fazer doces é sobre realizar o sonho de mulheres que querem viver da confeitaria."
+  &nbsp;&nbsp;<strong>Combo 2026: cursos a partir de R$47</strong>
+</div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="tb-text"><strong>Kim Confeitaria</strong> cursos para quem quer viver da confeitaria</div>
+  <a href="#cursos" class="btn btn-rose" style="font-size:13px;padding:9px 22px">Ver cursos</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <video autoplay muted loop playsinline>
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-ov"></div>
+  <div class="hero-body">
+    <p class="hero-pre">Não é sobre fazer doces — é sobre realizar sonhos de mulheres que querem viver da confeitaria.</p>
+    <div class="hero-pill"><div class="hero-dot"></div>Kim Confeitaria 2026</div>
+    <h1 class="hero-h1">A confeitaria cresceu <em>11,7% em 2025.</em> A maior parte desse dinheiro foi para quem aprendeu certo.</h1>
+    <p class="hero-sub">Você ainda pode ser uma delas. O setor movimenta R$26 bilhoes por ano no Brasil e para 2026 a projeção e de mais 10,8% de crescimento. Esses cursos existêm para você entrar nesse mercado com técnica, repertório e confiança para cobrar o qué seu produto vale.</p>
+    <div class="hero-btns">
+      <a href="#cursos" class="btn btn-rose">QUERO VER OS CURSOS</a>
+      <a href="#kim" class="btn btn-ghost">Quem é a Kim</a>
+    </div>
+    <p class="hero-anchor"><strong>+4.500 alunas formadas</strong> · IA especializada 24h · Acessó vitalício · Certificado incluso</p>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema" class="sec">
+  <div class="prob-blob prob-b1"></div><div class="prob-blob prob-b2"></div>
+  <div class="wrap">
+    <div class="prob-grid">
+      <div>
+        <div class="tag rv">O problema real</div>
+        <h2 class="prob-title rv">Tem uma razao específica pela qual confeiteiras que sabem fazer continuam cobrando <span>barato.</span></h2>
+        <p class="prob-body rv">Não é falta de talento. Não é cliente que não valoriza.<br><br>É falta do conjunto: a técnica que impressiona, o acabamento que justifica o preco, é o repertório que faz o cliente voltar e ainda indicar pra amiga.<br><br>A maioria aprende receita aqui, técnica ali sem método, sem progressão. Na hora de cobrar, a dúvida aparece: "sera qué o meu vale isso?" Essa dúvida é o que faz confeiteiras talentosas cobrarem R$80 num produto que deveria custar R$250.</p>
+        <div class="prob-highlight rv"><strong>O que resolve não é mais uma receita.</strong> É aprender o conjunto do básico ao avançado, com começo, meio e fim.</div>
+      </div>
+      <div class="prob-visual rv">
+        <div class="prob-vis-bg">&#127856;</div>
+        <div class="prob-vis-item">
+          <div class="pvi-lbl">Sem o método certo</div>
+          <div class="pvi-val red">R$ 80</div>
+        </div>
+        <div class="pvi-arrow">&#8595;</div>
+        <div class="prob-vis-item">
+          <div class="pvi-lbl">Com técnica e repertório</div>
+          <div class="pvi-val green">R$ 250</div>
+        </div>
+        <div class="prob-vis-item" style="background:var(--rose-pale);border-color:var(--rose-lt)">
+          <div class="pvi-lbl" style="color:var(--rose)">Diferença por bolo</div>
+          <div class="pvi-val" style="color:var(--rose)">+ R$ 170</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MECANISMO -->
+<section id="mecanismo" class="sec" style="background:var(--cream)">
+  <div class="wrap">
+    <div class="mec-box rv">
+      <div class="mec-tag">Por que e diferente</div>
+      <h2 class="mec-title">Por que esses cursos funcionam diferente de <em>tudo que você já tentou</em></h2>
+      <p class="mec-body">A maioria dos cursos online te entrega o conteúdo e te deixa sozinha. Você trava numa dúvida e fica esperando resposta no grupo por dias.<br><br>Aqui, cada cursó têm uma <strong>IA treinada específicamente com aquele conteúdo</strong> não uma IA generica. Ela conhece cada aula, cada técnica, cada modo de preparo. Você pergunta e recebe resposta em segundos, 24 horas por dia.<br><br>Você está montando um bolo de andar as 23h é a estrutura não ficou certa a IA responde na hora. Sem esperar. Sem travar. Eu sei que issó parece bom demais pra ser verdade. Mas e exatamenté o que já funciona com mais de <strong>4.500 alunas</strong>.</p>
+      <div class="mec-grid">
+        <div class="mec-card"><div class="mec-card-ico">&#129302;</div><div class="mec-card-title">IA especializada por curso</div><div class="mec-card-body">Treinada com o conteúdo específico de cada curso. Não uma IA generica.</div></div>
+        <div class="mec-card"><div class="mec-card-ico">&#128336;</div><div class="mec-card-title">Resposta em segundos, 24h</div><div class="mec-card-body">Não precisa esperar dias por resposta no grupo. Suporte instantaneo.</div></div>
+        <div class="mec-card"><div class="mec-card-ico">&#9989;</div><div class="mec-card-title">Acessó vitalício</div><div class="mec-card-body">Sem mensalidade. Paga uma vez é o conteúdo é seu para sempre.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos" class="sec">
+  <div class="wrap">
+    <div class="tag rv">Escolha seu curso</div>
+    <h2 class="rv" style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);font-weight:900;color:var(--text);line-height:1.1;max-width:20ch">Escolha por onde você quer <span style="color:var(--rose)">começar.</span></h2>
+    <p class="rv" style="margin-top:12px;font-size:14px;color:var(--text-soft);max-width:480px">Cada cursó foi criado para uma etapa diferente. Você pode começar por um e acessar os outros depois.</p>
+
+    <div class="cursos-grid" style="margin-top:36px">
+
+      <div class="cc featured rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,var(--rose-pale),var(--rose-lt))">
+          <span style="opacity:.25">&#127856;</span>
+          <div class="cc-badge">Mais completo</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-name">Formação Bolos em Buttercream</div>
+          <div class="cc-for">Para quem quer dominar dé uma vez</div>
+          <div class="cc-desc">O método mais completo do Brasil em bolos decorados. Do básico ao avançado. O mais caro porque é o mais completo é o que têm o maior indice de alunas que relataram cobrar mais depois de concluir.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 147</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,var(--lav-pale),var(--lav-lt))"><span style="opacity:.25">&#127959;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">Bolos de Andar</div>
+          <div class="cc-for">Para quem quer o produto premium</div>
+          <div class="cc-desc">Um bolo simples: R$80. O mesmo bolo com dois andares e acabamento correto: R$350, R$450, R$600. A diferença é a técnica de estrutura e montagem.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 97</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,var(--peach-pale),var(--peach-lt))"><span style="opacity:.25">&#127829;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">Tortas de Vitrine</div>
+          <div class="cc-for">Para quem quer vender pela imagem</div>
+          <div class="cc-desc">Tortas de vitrine vendem antes de provar. O visual faz o cliente tirar foto, postar, marcar publicidade que você não paga.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 97</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,#fff5f8,#ffc8d4)"><span style="opacity:.25">&#127912;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">Bolo de Camadas Finas</div>
+          <div class="cc-for">Para quem quer inovar e aumentar o ticket</div>
+          <div class="cc-desc">A técnica que modernizou o mercado nos ultimos dois anos. Visual sofisticado é um produto que justifica cobrar mais sem precisar explicar por que.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 37</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,#fff5f0,#ffe0e0)"><span style="opacity:.25">&#127876;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">Bolo Natalino</div>
+          <div class="cc-for">Para transformar dezembro no mes mais rentavel</div>
+          <div class="cc-desc">Dezembro é o mes em que confeiteiras faturam de 2 a 4 vezes mais. Mas só para quem se preparou antes.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 37</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,var(--mint-pale),var(--mint-lt))">
+          <span style="opacity:.25">&#127968;</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-name">Bolos Caseiros</div>
+          <div class="cc-for">Para quem está começando do zero</div>
+          <div class="cc-desc">Clássicos com demanda o ano todo. Sem depender de tendencia ou data comemorativa. Perfeito para a primeira encomenda real.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 47</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv" style="grid-column:span 1">
+        <div class="cc-img" style="background:linear-gradient(135deg,var(--peach-pale),var(--peach-lt))"><span style="opacity:.25">&#127854;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">Sobremesas</div>
+          <div class="cc-for">Para vender mais sem precisar de mais clientes</div>
+          <div class="cc-desc">Quem têm só bolo perde venda. Quem têm sobremesa vende mais para o mesmo cliente maior ticket medio, mesma clientela.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 37</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE CURSO</a>
+        </div>
+      </div>
+
+      <div class="cc rv">
+        <div class="cc-img" style="background:linear-gradient(135deg,#f5f0ff,#e8dcff)"><span style="opacity:.25">&#128209;</span></div>
+        <div class="cc-body">
+          <div class="cc-name">E-book: Recheios que Não Vao ao Fogo</div>
+          <div class="cc-for">Para cardapio mais completo com o mínimo de complicacao</div>
+          <div class="cc-desc">Os recheios mais práticos, com validade maior sem fogão, sem risco de errar o ponto. Aumentam o valor percebido sem aumentar muito o custo.</div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">R$ 27</div>
+          <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="cc-cta">QUERO ESTE</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- APOSTILAS -->
+    <div class="apost-section rv">
+      <div class="apost-left">
+        <div class="apost-title">Apostilas a partir de R$27</div>
+        <div class="apost-desc">O produto bonito na foto vende mais. A divulgação certa atrai mais cliente. Essas apostilas fecham o ciclo.</div>
+        <div class="apost-pills">
+          <div class="ap-pill">Fotografia</div>
+          <div class="ap-pill">Marketing</div>
+          <div class="ap-pill">Massas</div>
+          <div class="ap-pill">Ovos de Pascoa</div>
+          <div class="ap-pill">Apaixonada pelos Bolos</div>
+        </div>
+      </div>
+      <a href="https://pay.hotmart.com/C80425252S?hotfeature=51" class="btn btn-rose" style="white-space:nowrap;flex-shrink:0">VER APOSTILAS</a>
+    </div>
+  </div>
+</section>
+
+<!-- KIM -->
+<section id="kim" class="sec">
+  <div class="wrap">
+    <div class="kim-grid">
+      <div style="position:relative">
+        <div class="kim-img rv">
+          <!-- Substitua: <img src="fotos/kim.jpg" alt="Kim"> -->
+          <span style="opacity:.2;font-size:68px">&#128105;&#8205;&#127859;</span>
+        </div>
+        <div class="kim-fl-1 fl"><div class="kfn">4.500+</div><div class="kfl">ALUNAS FORMADAS</div></div>
+        <div class="kim-fl-2"><div class="kim-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="kim-fl-nm">Kim Confeitaria</div><div class="kim-fl-sb">desde 2021</div></div>
+      </div>
+      <div>
+        <div class="tag rv">Quem é a Kim</div>
+        <h2 class="kim-name rv">Quem está do <em>outro lado</em> dissó tudo</h2>
+        <p class="kim-bio rv">
+          Oi, eu sou a Kim. Mãe da Liz, esposa, confeiteira ha mais de 4 anos.<br><br>
+          Não comecei com dom natural. Comecei errando muito. Passei por reality show de gastronomia, trabalhei em lojá fisica, vendi pelo iFood, fui chef do cafe mais reconhecido da minha cidade.<br><br>
+          Em 2021 criei a <strong>Formação Bolos em Buttercream</strong> com uma ideia simples: passar tudo que precisei tanto no começo, de forma organizada, com método. Desde então, mais de <strong>4.500 confeiteiras</strong> passaram pelos meus cursos. Muitas começaram do absoluto zero. Hoje vendem, faturam e constroem a própria independência em casa, no horário delas.<br><br>
+          Não vou prometer que vai ser fácil. Vou prometer que você não vai estar sozinha.
+        </p>
+        <div class="kim-tags rv">
+          <div class="ktag">Reality Show</div>
+          <div class="ktag">Lojá fisica</div>
+          <div class="ktag">iFood</div>
+          <div class="ktag">Chef de cafe</div>
+          <div class="ktag">4.500+ alunas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section id="para-quem" class="sec">
+  <div class="wrap">
+    <div class="pq-grid">
+      <div>
+        <div class="tag lav rv">Para quem e</div>
+        <h2 class="rv" style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.8vw,48px);font-weight:900;color:var(--text);line-height:1.1">Issó foi feito para <span style="color:var(--rose)">você que...</span></h2>
+        <div class="pq-items">
+          <div class="pq-itêm rv"><div class="pq-check">&#10003;</div><div class="pq-txt">Nunca fez confeitaria e quer aprender do zero com método claro</div></div>
+          <div class="pq-itêm rv"><div class="pq-check">&#10003;</div><div class="pq-txt">Já faz, mas cobra barato demais e sabe qué seu produto vale mais</div></div>
+          <div class="pq-itêm rv"><div class="pq-check">&#10003;</div><div class="pq-txt">E mãe com rotina cheia e precisa de algo que encaixe no seu tempo</div></div>
+          <div class="pq-itêm rv"><div class="pq-check">&#10003;</div><div class="pq-txt">Quer renda extra sem depender de patrão ou horário fixo</div></div>
+          <div class="pq-itêm rv"><div class="pq-check">&#10003;</div><div class="pq-txt">Já comprou cursó antes, não avançou, e quer entender o que faltava</div></div>
+        </div>
+      </div>
+      <div class="pq-vis rv">
+        <div class="pq-vis-bg">&#127856;</div>
+        <div>
+          <div class="pq-big">4.500+</div>
+          <div class="pq-big-sub">confeiteiras já transformadas</div>
+          <p style="margin-top:18px;font-size:13px;color:var(--rose);font-weight:500;text-align:center;opacity:.85;position:relative;z-index:1">Muitas começaram do zero.<br>Hoje vendem, faturam e têm independência.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="sec">
+  <div class="wrap">
+    <div class="tag rv">Depoimentos</div>
+    <h2 class="rv" style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.8vw,48px);font-weight:900;color:var(--text);line-height:1.1;max-width:18ch">Quem provou, <span style="color:var(--rose)">voltou.</span></h2>
+  </div>
+  <div class="dep-wrap">
+    <div class="dep-row">
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Em 3 semanas já tinha recebido minha primeira encomenda de R$180. Não acreditei quando a cliente transferiu."</div><div class="dep-auth"><div class="dep-av">FR</div><div><div class="dep-nm">Fernanda R.</div><div class="dep-rl">São Paulo / SP</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"O que me travava era a dúvida na hora de cobrar. Depois que aprendi a técnica de verdade, a insegurança foi embora. Hoje cobro o que acho justo é o cliente aceita."</div><div class="dep-auth"><div class="dep-av">MT</div><div><div class="dep-nm">Marcia T.</div><div class="dep-rl">Fortaleza / CE</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Pensei que era tarde para começar. Tinha 44 anos. Hoje tenho lista de espera para encomenda."</div><div class="dep-auth"><div class="dep-av">SA</div><div><div class="dep-nm">Simone A.</div><div class="dep-rl">Curitiba / PR</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Aprendi a fazer bolo de andar do zero e hoje vendo por R$450. Nunca achei que conseguiria cobrar esse valor."</div><div class="dep-auth"><div class="dep-av">CS</div><div><div class="dep-nm">Carla S.</div><div class="dep-rl">Vende pelo iFood</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Aprendi precificação e parei de me subestimar. Hoje cobro R$320 pelo bolo que antes vendia por R$120."</div><div class="dep-auth"><div class="dep-av">LO</div><div><div class="dep-nm">Larissa O.</div><div class="dep-rl">Ticket aumentou 3x</div></div></div></div>
+      <!-- duplicata loop -->
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Em 3 semanas já tinha recebido minha primeira encomenda de R$180. Não acreditei quando a cliente transferiu."</div><div class="dep-auth"><div class="dep-av">FR</div><div><div class="dep-nm">Fernanda R.</div><div class="dep-rl">São Paulo / SP</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"O que me travava era a dúvida na hora de cobrar. Depois que aprendi a técnica de verdade, a insegurança foi embora. Hoje cobro o que acho justo é o cliente aceita."</div><div class="dep-auth"><div class="dep-av">MT</div><div><div class="dep-nm">Marcia T.</div><div class="dep-rl">Fortaleza / CE</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Pensei que era tarde para começar. Tinha 44 anos. Hoje tenho lista de espera para encomenda."</div><div class="dep-auth"><div class="dep-av">SA</div><div><div class="dep-nm">Simone A.</div><div class="dep-rl">Curitiba / PR</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Aprendi a fazer bolo de andar do zero e hoje vendo por R$450. Nunca achei que conseguiria cobrar esse valor."</div><div class="dep-auth"><div class="dep-av">CS</div><div><div class="dep-nm">Carla S.</div><div class="dep-rl">Vende pelo iFood</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Aprendi precificação e parei de me subestimar. Hoje cobro R$320 pelo bolo que antes vendia por R$120."</div><div class="dep-auth"><div class="dep-av">LO</div><div><div class="dep-nm">Larissa O.</div><div class="dep-rl">Ticket aumentou 3x</div></div></div></div>
+    </div>
+    <div class="dep-row rev">
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Já é a quarta encomenda destá semana. O que mudou foi a qualidade do acabamento que aprendi aqui."</div><div class="dep-auth"><div class="dep-av">BN</div><div><div class="dep-nm">Beatriz N.</div><div class="dep-rl">4 encomendas por semana</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"O cursó de torta de vitrine mudou meu negocio. Meus produtos agora têm uma apresentação completamente diferente."</div><div class="dep-auth"><div class="dep-av">MR</div><div><div class="dep-nm">Mariana R.</div><div class="dep-rl">Confeitaria de vitrine</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Comecei do zero, sem saber nem segurar o saco de confeitar. Em 3 meses já estava recebendo encomendas."</div><div class="dep-auth"><div class="dep-av">RP</div><div><div class="dep-nm">Renata P.</div><div class="dep-rl">Comecou do zero</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Vale muito mais do que paguei. Nunca tinha visto esse nivel de suporte em cursó online."</div><div class="dep-auth"><div class="dep-av">FM</div><div><div class="dep-nm">Fernanda M.</div><div class="dep-rl">Aluna recorrente</div></div></div></div>
+      <!-- duplicata -->
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Já é a quarta encomenda destá semana. O que mudou foi a qualidade do acabamento que aprendi aqui."</div><div class="dep-auth"><div class="dep-av">BN</div><div><div class="dep-nm">Beatriz N.</div><div class="dep-rl">4 encomendas por semana</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"O cursó de torta de vitrine mudou meu negocio. Meus produtos agora têm uma apresentação completamente diferente."</div><div class="dep-auth"><div class="dep-av">MR</div><div><div class="dep-nm">Mariana R.</div><div class="dep-rl">Confeitaria de vitrine</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Comecei do zero, sem saber nem segurar o saco de confeitar. Em 3 meses já estava recebendo encomendas."</div><div class="dep-auth"><div class="dep-av">RP</div><div><div class="dep-nm">Renata P.</div><div class="dep-rl">Comecou do zero</div></div></div></div>
+      <div class="dep-card"><div class="dep-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="dep-text">"Vale muito mais do que paguei. Nunca tinha visto esse nivel de suporte em cursó online."</div><div class="dep-auth"><div class="dep-av">FM</div><div><div class="dep-nm">Fernanda M.</div><div class="dep-rl">Aluna recorrente</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA + CTA FINAL -->
+<section id="cta-final">
+  <div class="cfb1"></div><div class="cfb2"></div>
+  <div class="cta-inner">
+    <div class="gar-badge rv">&#128737; Garantia incondicional de 7 dias</div>
+    <h2 class="cf-title rv">7 dias para decidir. O risco e <em>todo nosso.</em></h2>
+    <p class="gar-text rv">Acesse, assista, explore. Se em até 7 dias sentir que não é para você por qualquer motivo você pedé o reembolsó e recebe <strong>100% de volta</strong>. Sem formulario longo. Sem questionamento.<br><br>Por que ofereço isso? Porque quem confia no que entrega não têm medo de dar essa garantia.</p>
+    <div class="cf-divider rv"></div>
+    <p class="cf-sub rv">O mercado está crescendo. Sua cliente está procurando. O único passó que falta é o seu.<br><br>Em 2025, mais de <strong>2 milhoes de mulheres</strong> abriram o próprio negocio no Brasil. Muitas começaram exatamente de onde você está agora.</p>
+    <div class="cf-btns rv">
+      <a href="#cursos" class="btn btn-rose-lg">VER TODOS OS CURSOS</a>
+    </div>
+    <div class="cf-seals rv">
+      <span>&#128274; Pagamento seguro</span><span>·</span>
+      <span>&#128179; Cartao ou Pix</span><span>·</span>
+      <span>&#9989; Acessó imediato</span><span>·</span>
+      <span>&#128260; Garantia de 7 dias</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-left">
+        <div class="tag rv">Dúvidas</div>
+        <h2 class="faq-left-title rv">Rápido e <span>direto.</span></h2>
+        <p class="faq-sub rv">Respondemos as principais perguntas aqui. Qualquer dúvida adicional: suporte@kimconfeitaria.com.br</p>
+        <a href="#cursos" class="btn btn-rose rv" style="margin-top:26px;font-size:13px;padding:12px 24px">Ver todos os cursos</a>
+      </div>
+      <div class="rv">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Sou iniciante, serve?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">Sim. Sem nenhum conhecimento prévio necessario.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Quanto tempo tenho acesso?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">Para sempre. Sem mensalidade, sem prazo.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Como funciona a IA?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">Cada cursó têm uma IA treinada com aquele conteúdo específico. Você pergunta dentro da plataforma e recebe resposta na hora 24h por dia.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Aceita cartao e Pix?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">Sim. Parcela em até 12x no cartao.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Tem certificado?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">Sim. Emitido direto pela plataforma ao concluir.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">E se não gostar?<div class="faq-ico">+</div></button><div class="faq-a"><div class="faq-a-in">7 dias, 100% de volta, sem perguntas.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">Kim Confeitaria</div>
+  <div class="foot-links">
+    <a href="mailto:suporte@kimconfeitaria.com.br">Suporte</a>
+    <a href="#">Politica de privacidade</a>
+    <a href="#">Termos de uso</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Kim Confeitaria · Todos os direitos reservados</div>
+</footer>
+
+<script>
+// TOPBAR
+var topbar=document.getElementById('topbar');
+window.addEventListener('scroll',function(){topbar.classList.toggle('show',scrollY>innerHeight*.6);},{passive:true});
+
+// REVEAL
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('on');},i*50);io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+// FAQ
+function toggleFaq(btn){var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});if(!isOpen)item.classList.add('open');}
+</script>
+</body>
+</html>
